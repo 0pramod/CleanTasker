@@ -33,8 +33,14 @@ export default function ContractorPerformance() {
     const weekJobs = myJobs.filter((j) => j.week === t.week);
     return {
       week: t.week,
-      completionRate: pct(weekJobs.filter((j) => j.status === "Completed").length, Math.max(1, weekJobs.length)),
-      delayRate: pct(weekJobs.filter((j) => j.delayed).length, Math.max(1, weekJobs.length)),
+      completionRate: pct(
+        weekJobs.filter((j) => j.status === "Completed").length,
+        Math.max(1, weekJobs.length)
+      ),
+      delayRate: pct(
+        weekJobs.filter((j) => j.delayed).length,
+        Math.max(1, weekJobs.length)
+      ),
     };
   });
 
@@ -87,12 +93,32 @@ export default function ContractorPerformance() {
             </LineChart>
           </ResponsiveContainer>
         </div>
-        <div className="mt-3 text-xs text-slate-500">
-          If delays rise, it usually hits inspection scores next.
+      </ChartCard>
+
+      <ChartCard
+        title="Performance Summary"
+        subtitle="Quick comparison and weekly execution"
+      >
+        <div className="grid gap-3 sm:grid-cols-3">
+          <div className="rounded-lg border border-line bg-slate-50 p-4">
+            <div className="text-xs font-semibold text-slate-500">Platform Avg Completion</div>
+            <div className="mt-1 text-xl font-bold text-slate-900">78%</div>
+          </div>
+          <div className="rounded-lg border border-line bg-slate-50 p-4">
+            <div className="text-xs font-semibold text-slate-500">Your Completion</div>
+            <div className="mt-1 text-xl font-bold text-slate-900">{completionRate}%</div>
+          </div>
+          <div className="rounded-lg border border-line bg-slate-50 p-4">
+            <div className="text-xs font-semibold text-slate-500">Your Delay Rate</div>
+            <div className="mt-1 text-xl font-bold text-slate-900">{delayRate}%</div>
+          </div>
         </div>
       </ChartCard>
 
-      <ChartCard title="Job History" subtitle="Latest jobs (demo data)">
+      <ChartCard
+        title="Job History"
+        subtitle="Latest jobs (demo data)"
+      >
         <Table columns={cols} rows={rows} rowKey={(r) => r.id} />
       </ChartCard>
     </div>

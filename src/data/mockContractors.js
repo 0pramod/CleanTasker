@@ -54,9 +54,7 @@ export const slaTrend = [
   { week: "W6", onTime: 91, late: 9 },
 ];
 
-
 export const jobs = [
-  // contractor, site, status, start/end durations (minutes)
   { id: "j1", contractorId: "c1", contractor: "ABC Cleaning Services", site: "Central Plaza", status: "Completed", delayed: false, durationMin: 55, rating: 4.6, week: "W1" },
   { id: "j2", contractorId: "c1", contractor: "ABC Cleaning Services", site: "Central Plaza", status: "Completed", delayed: false, durationMin: 48, rating: 4.7, week: "W1" },
   { id: "j3", contractorId: "c1", contractor: "ABC Cleaning Services", site: "Riverside", status: "Completed", delayed: true, durationMin: 72, rating: 4.3, week: "W2" },
@@ -86,3 +84,80 @@ export const jobTrend = [
   { week: "W6", total: 3, completed: 2, delayed: 1 },
 ];
 
+export const inspectionAudits = [
+  { contractor: "ABC Cleaning Services", site: "Central Plaza", pass: 18, minor: 3, major: 1, failed: 0, avgScore: 92, reinspections: 0 },
+  { contractor: "ARM Facility Services", site: "Greenwood Mall", pass: 14, minor: 5, major: 2, failed: 1, avgScore: 85, reinspections: 1 },
+  { contractor: "CleanWave Partners", site: "Riverside", pass: 11, minor: 6, major: 3, failed: 1, avgScore: 79, reinspections: 2 },
+  { contractor: "Sparkle Bright Cleaning", site: "North Hub", pass: 9, minor: 5, major: 4, failed: 2, avgScore: 71, reinspections: 3 },
+  { contractor: "Bright Shine Cleaners", site: "South Point", pass: 7, minor: 4, major: 5, failed: 3, avgScore: 63, reinspections: 4 },
+];
+
+export const clientRequests = [
+  { week: "W1", open: 8, closed: 7, avgResponseHours: 2.4, escalations: 0 },
+  { week: "W2", open: 10, closed: 8, avgResponseHours: 3.1, escalations: 1 },
+  { week: "W3", open: 11, closed: 10, avgResponseHours: 2.8, escalations: 0 },
+  { week: "W4", open: 14, closed: 11, avgResponseHours: 4.2, escalations: 2 },
+  { week: "W5", open: 12, closed: 12, avgResponseHours: 3.0, escalations: 1 },
+  { week: "W6", open: 9, closed: 10, avgResponseHours: 2.2, escalations: 0 },
+];
+
+export const clientRequestSites = [
+  { client: "Central Plaza", requests: 12, avgResponse: 2.1, sla: "Good" },
+  { client: "Greenwood Mall", requests: 9, avgResponse: 3.8, sla: "Watch" },
+  { client: "Riverside", requests: 7, avgResponse: 2.9, sla: "Good" },
+  { client: "North Hub", requests: 5, avgResponse: 5.6, sla: "Risk" },
+];
+
+export const shiftRosters = [
+  { site: "Central Plaza", required: 10, scheduled: 10, understaffed: 0, overtimeHours: 4 },
+  { site: "Greenwood Mall", required: 8, scheduled: 7, understaffed: 1, overtimeHours: 6 },
+  { site: "Riverside", required: 6, scheduled: 5, understaffed: 1, overtimeHours: 5 },
+  { site: "North Hub", required: 7, scheduled: 6, understaffed: 1, overtimeHours: 7 },
+  { site: "South Point", required: 5, scheduled: 5, understaffed: 1, overtimeHours: 3 },
+];
+
+export const timesheetAnalytics = [
+  { contractor: "ABC Cleaning Services", scheduledHours: 220, actualHours: 228, attendance: 98, missingTimesheets: 0 },
+  { contractor: "ARM Facility Services", scheduledHours: 180, actualHours: 192, attendance: 95, missingTimesheets: 1 },
+  { contractor: "CleanWave Partners", scheduledHours: 160, actualHours: 176, attendance: 92, missingTimesheets: 2 },
+  { contractor: "Sparkle Bright Cleaning", scheduledHours: 150, actualHours: 171, attendance: 89, missingTimesheets: 3 },
+  { contractor: "Bright Shine Cleaners", scheduledHours: 120, actualHours: 142, attendance: 87, missingTimesheets: 4 },
+];
+
+export const contractorWorkerCompliance = [
+  { worker: "John Carter", status: "Valid", days: 90, document: "Police Check", site: "Central Plaza" },
+  { worker: "Mia Wong", status: "Valid", days: 120, document: "ID Verification", site: "Central Plaza" },
+  { worker: "Daniel Shah", status: "Expiring", days: 12, document: "WWCC Clearance", site: "Riverside" },
+  { worker: "Ella Martin", status: "Pending", days: 0, document: "Induction", site: "Greenwood Mall" },
+  { worker: "Noah Patel", status: "Expired", days: -4, document: "First Aid", site: "Riverside" },
+];
+
+export const contractorInspectionAudits = [
+  { month: "Oct", score: 78, pass: 5, minor: 2, major: 1, failed: 0 },
+  { month: "Nov", score: 80, pass: 6, minor: 2, major: 1, failed: 0 },
+  { month: "Dec", score: 76, pass: 5, minor: 3, major: 1, failed: 1 },
+  { month: "Jan", score: 82, pass: 7, minor: 2, major: 1, failed: 0 },
+  { month: "Feb", score: 85, pass: 7, minor: 1, major: 1, failed: 0 },
+  { month: "Mar", score: 83, pass: 6, minor: 2, major: 1, failed: 0 },
+];
+
+export const contractorClientRequests = [
+  { week: "W1", open: 3, closed: 2, avgResponseHours: 1.8, escalations: 0 },
+  { week: "W2", open: 4, closed: 3, avgResponseHours: 2.1, escalations: 0 },
+  { week: "W3", open: 5, closed: 4, avgResponseHours: 2.4, escalations: 1 },
+  { week: "W4", open: 4, closed: 4, avgResponseHours: 1.9, escalations: 0 },
+  { week: "W5", open: 6, closed: 5, avgResponseHours: 2.6, escalations: 1 },
+  { week: "W6", open: 3, closed: 4, avgResponseHours: 1.7, escalations: 0 },
+];
+
+export const contractorShiftRosters = [
+  { site: "Central Plaza", required: 5, assigned: 5, scheduled: 5 },
+  { site: "Greenwood Mall", required: 4, assigned: 3, scheduled: 3 },
+  { site: "Riverside", required: 3, assigned: 4, scheduled: 4 },
+];
+
+export const contractorTimesheets = [
+  { site: "Central Plaza", scheduledHours: 84, actualHours: 86, attendance: 98, missingTimesheets: 0 },
+  { site: "Greenwood Mall", scheduledHours: 56, actualHours: 61, attendance: 94, missingTimesheets: 1 },
+  { site: "Riverside", scheduledHours: 42, actualHours: 45, attendance: 92, missingTimesheets: 1 },
+];

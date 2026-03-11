@@ -26,9 +26,7 @@ export default function ManagerPerformance() {
   const completionRate = pct(completedJobs, totalJobs);
   const delayRate = pct(delayedJobs, totalJobs);
   const avgDuration = Math.round(avg(jobs.map((j) => j.durationMin)));
-
   const platformAvgRating = round1(avg(jobs.map((j) => j.rating)));
-
   const riskScore = calcPortfolioRisk({ delayRate, completionRate, avgDuration });
 
   const trend = jobTrend.map((t) => ({
@@ -38,34 +36,35 @@ export default function ManagerPerformance() {
   }));
 
   const jobsByContractor = groupBy(jobs, (j) => j.contractorId);
-  const perfRows = contractors.map((c) => {
-    const cj = jobsByContractor[c.id] || [];
-    const total = cj.length;
-    const completed = cj.filter((j) => j.status === "Completed").length;
-    const delayed = cj.filter((j) => j.delayed).length;
-    const avgDur = total ? Math.round(avg(cj.map((j) => j.durationMin))) : 0;
-    const rating = total ? round1(avg(cj.map((j) => j.rating))) : null;
+  const perfRows = contractors
+    .map((c) => {
+      const cj = jobsByContractor[c.id] || [];
+      const total = cj.length;
+      const completed = cj.filter((j) => j.status === "Completed").length;
+      const delayed = cj.filter((j) => j.delayed).length;
+      const avgDur = total ? Math.round(avg(cj.map((j) => j.durationMin))) : 0;
+      const rating = total ? round1(avg(cj.map((j) => j.rating))) : null;
 
-    // risk: delay% + low compliance + low inspection (weights)
-    const delayPct = pct(delayed, total || 1);
-    const r =
-      delayPct * 0.4 +
-      (100 - c.score) * 0.3 +
-      (100 - c.lastInspection) * 0.3;
+      const delayPct = pct(delayed, total || 1);
+      const r =
+        delayPct * 0.4 +
+        (100 - c.score) * 0.3 +
+        (100 - c.lastInspection) * 0.3;
 
-    return {
-      id: c.id,
-      contractor: c.name,
-      jobs: total,
-      completion: pct(completed, total || 1),
-      delay: delayPct,
-      avgDur,
-      rating,
-      inspection: c.lastInspection,
-      compliance: c.score,
-      risk: Math.round(r),
-    };
-  }).sort((a, b) => b.risk - a.risk);
+      return {
+        id: c.id,
+        contractor: c.name,
+        jobs: total,
+        completion: pct(completed, total || 1),
+        delay: delayPct,
+        avgDur,
+        rating,
+        inspection: c.lastInspection,
+        compliance: c.score,
+        risk: Math.round(r),
+      };
+    })
+    .sort((a, b) => b.risk - a.risk);
 
   const jobsChart = perfRows.map((r) => ({ name: shortName(r.contractor), jobs: r.jobs }));
   const durationChart = perfRows.map((r) => ({ name: shortName(r.contractor), avgDur: r.avgDur }));
@@ -109,9 +108,6 @@ export default function ManagerPerformance() {
               </LineChart>
             </ResponsiveContainer>
           </div>
-          <div className="mt-3 text-xs text-slate-500">
-            Completion should stay high. Delay should trend down.
-          </div>
         </ChartCard>
 
         <ChartCard
@@ -124,9 +120,6 @@ export default function ManagerPerformance() {
             <SummaryRow label="Avg Contractor Rating" value={platformAvgRating ? `${platformAvgRating}/5` : "—"} badge={platformAvgRating >= 4.2 ? { v: "good", t: "Strong" } : platformAvgRating >= 3.6 ? { v: "warn", t: "Mixed" } : { v: "bad", t: "Low" }} />
             <SummaryRow label="Performance Risk Score" value={riskScore} badge={riskScore <= 30 ? { v: "good", t: "Low" } : riskScore <= 60 ? { v: "warn", t: "Medium" } : { v: "bad", t: "High" }} />
             <SummaryRow label="Focus" value={delayRate > 15 ? "Reduce delays" : completionRate < 80 ? "Improve completion" : "Maintain"} badge={{ v: "neutral", t: "This week" }} />
-          </div>
-          <div className="mt-4 rounded-lg border border-line bg-slate-50 p-4 text-sm text-slate-700">
-            Best action: target the top 2 contractors by <span className="font-semibold">Risk</span> and fix delays + inspections.
           </div>
         </ChartCard>
       </div>
@@ -207,11 +200,10 @@ function shortName(name) {
 }
 
 function calcPortfolioRisk({ delayRate, completionRate, avgDuration }) {
-  // Simple executive score (0-100). Higher = worse.
   const risk =
     delayRate * 0.6 +
     (100 - completionRate) * 0.3 +
-    Math.max(0, (avgDuration - 60)) * 0.2;
+    Math.max(0, avgDuration - 60) * 0.2;
   return Math.max(0, Math.min(100, Math.round(risk)));
 }
 

@@ -8,7 +8,9 @@ export default function ContractorLayout() {
 
       <div className="mx-auto max-w-[1200px] px-6 py-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-slate-900">Contractor Dashboard</h1>
+          <h1 className="text-2xl font-semibold text-slate-900">
+            Contractor Dashboard
+          </h1>
           <p className="text-sm text-slate-500">
             Your company view: compliance health, expiry alerts, sites, inspections
           </p>

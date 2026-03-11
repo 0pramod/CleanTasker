@@ -20,7 +20,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/contractor/dashboard" replace />} />
 
-        {/* Manager (internal) */}
         <Route path="/manager" element={<ManagerLayout />}>
           <Route path="dashboard" element={<ManagerDashboard />} />
           <Route path="performance" element={<ManagerPerformance />} />
@@ -30,7 +29,6 @@ export default function App() {
           <Route path="compliance" element={<ComplianceTracker />} />
         </Route>
 
-        {/* Contractor (external) */}
         <Route path="/contractor" element={<ContractorLayout />}>
           <Route path="dashboard" element={<ContractorDashboard />} />
           <Route path="performance" element={<ContractorPerformance />} />
