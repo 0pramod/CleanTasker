@@ -14,11 +14,14 @@ import WorkforceTracker from "./pages/WorkforceTracker.jsx";
 import WorkforceVerification from "./pages/WorkforceVerification.jsx";
 import ComplianceTracker from "./pages/ComplianceTracker.jsx";
 
+import CleanerDashboard from "./pages/CleanerDashboard.jsx";
+
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/contractor/dashboard" replace />} />
+        <Route path="/cleaner/dashboard" element={<CleanerDashboard />} />
 
         <Route path="/manager" element={<ManagerLayout />}>
           <Route path="dashboard" element={<ManagerDashboard />} />
